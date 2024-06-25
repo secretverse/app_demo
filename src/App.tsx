@@ -8,6 +8,13 @@ import axios from "axios";
 import { createGuildClient, createSigner } from "@guildxyz/sdk";
 import { Octokit } from 'octokit';
 
+declare global {
+  interface Window {
+    keplr?: any;
+    leap?: any;
+    cosmostation?: any;
+  }
+}
 
 function App() {
   const [addr, setAddr] = useState('');
@@ -219,30 +226,67 @@ function App() {
 
 
   const Login = async (code: string) => {
-    const fuel = new Fuel({
-        connectors: [
-          new FueletWalletConnector(),
-          new FuelWalletConnector(),
-        ],
-      });
-      console.log(code);
-    const connectors = await fuel.connectors();
-    console.log("available connectors", connectors);
-    const connectorName = code;
-    const isSelected = await fuel.selectConnector(connectorName);
-    console.log("isSelected", isSelected);
-    const connectionState = await fuel.connect();
-    console.log("connectionState", connectionState);
-    //const hasConnector = await fuel.hasConnector();
-    //console.log("hasConnector", hasConnector);
+    if (code == 'keplr'){
+      if (!window.keplr) {
+          throw ("Please install keplr extension");
+      } else {
+          try {
+              const chainId = "cosmoshub-4";
 
-    const accounts = await fuel.accounts();
-    console.log("Accounts", accounts);
-    const wallet = Wallet.fromAddress(accounts[0].toString());
-    const evmWallet = wallet.address.toB256();
-    console.log(evmWallet);
-    setAddr(accounts[0].toString());
-    setHexAddr(evmWallet);
+              await window.keplr.enable(chainId);
+
+              const offlineSigner = window.keplr.getOfflineSigner(chainId);
+
+              const accounts = await offlineSigner.getAccounts();
+              console.log(accounts[0].address);
+
+          } catch (err){
+              console.log(err);
+          }
+      }
+    }
+    else if (code == 'leap'){
+      if (!window.leap) {
+          throw ("Please install leap extension");
+      } else {
+          try {
+              const chainId = "cosmoshub-4";
+
+              await window.leap.enable(chainId);
+
+              const offlineSigner = window.leap.getOfflineSigner(chainId);
+
+              const accounts = await offlineSigner.getAccounts();
+              console.log(accounts[0].address);
+
+          } catch (err){
+              console.log(err);
+          }
+      }
+    }
+    else if (code == 'cmstn'){
+      if (!window.cosmostation) {
+          throw ("Please install cosmostation extension");
+      } else {
+          try {
+              const chainId = "cosmoshub-4";
+              const account = await window.cosmostation.cosmos.request({
+                  method: "cos_requestAccount",
+                  params: { chainName: chainId },
+                });
+              console.log(account.address);
+
+          } catch (err){
+              console.log(err);
+          }
+      }
+    }
+    else {
+      console.log('invalid code');
+      return;
+    }
+
+
 
 
   }
