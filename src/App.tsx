@@ -191,34 +191,6 @@ function App() {
     window.location.href = 'https://discord.com/oauth2/authorize?client_id=1252218334699585536&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=identify';
   }
 
-  const GuildAuth = async () => {
-    const gid = '30930';
-    const wallet = hexAddr || '';
-
-    if (wallet == ''){
-      console.log('Please connect a wallet');
-      return;
-    }
-    const guildClient = createGuildClient("Authentix");
-
-    const userGuilds = await guildClient.user
-      .getMemberships(wallet);
-    console.log(userGuilds);
-    var roles = [0];
-    var joined = '';
-    var i = 0;
-    while (i < userGuilds.length){
-      if (userGuilds[i].guildId == 30930){
-        roles = userGuilds[i].roleIds;
-        joined = userGuilds[i].joinedAt.toString();
-        joined = joined.substring(0, 10);
-      }
-      i++;
-    }
-    console.log(roles);
-    const joined_ts = new Date(joined).getTime() / 1000;
-    console.log(joined_ts);
-  }
 
 
   
@@ -339,9 +311,7 @@ function App() {
           <a onClick={DiscordAuth} style={{"cursor":'pointer'}}> Discord Verification </a>
           <a>--------------------------------------------</a>
           <a onClick={GithubAuth} style={{"cursor":'pointer'}}> GitHub Verification </a>
-          <a>--------------------------------------------</a>
 
-          <a onClick={GuildAuth} style={{"cursor":'pointer'}}> Guild XYZ Verification </a>
         </header>
     </div>
   );
