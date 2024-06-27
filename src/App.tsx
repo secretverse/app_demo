@@ -121,14 +121,14 @@ function App() {
 
   const MouseAuth = async () => {
     try{
-      const response = await axios.post("https://gm-serve3.onrender.com/api/authentix/mouse", {
+      const response = await axios.post("https://gm-serve3.onrender.com/api/secret/mouse", {
         data: null,
     });
     console.log(response.data.mouseHuman);
     if (response.data.mouseHuman){
       document.getElementById("mouse_area")!.innerHTML = `<br/><br/>
         <div style="color: pink; font-size: .6em;">Congratulations. Your mouse movement based authentication is
-        successfully completed. Captcha authentication is one of the steps Authentix App requires
+        successfully completed. Captcha authentication is one of the steps Secret Mission App requires
         to generate your successful Proof of Humanity (PoH) authorization.</div>
         <br/><br/>`;
         document.getElementById('mv')!.style.display = 'none';
@@ -275,7 +275,7 @@ function App() {
             href="https://secretverse.medium.com"
             target="_blank"
             rel="noopener noreferrer"
-          >
+          > <br/>
             Secret Mission Demo
           </a>
           <br/>
@@ -311,7 +311,7 @@ function App() {
           <a onClick={DiscordAuth} style={{"cursor":'pointer'}}> Discord Verification </a>
           <a>--------------------------------------------</a>
           <a onClick={GithubAuth} style={{"cursor":'pointer'}}> GitHub Verification </a>
-
+        <a>--------------------------------------------</a>
         </header>
     </div>
   );
