@@ -188,7 +188,7 @@ function App() {
   }
 
   const DiscordAuth = async () => {
-    window.location.href = 'https://discord.com/oauth2/authorize?client_id=1252218334699585536&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=identify';
+    window.location.href = 'https://discord.com/oauth2/authorize?client_id=1256147573761114135&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2F&scope=identify';
   }
 
 
