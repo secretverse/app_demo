@@ -184,7 +184,7 @@ function App() {
   }
 
   const GithubAuth = async () => {
-    window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23liA4WFBMaBVe56Gq&redirect_uri=https://authentix-fuel.netlify.app/&scope=read:user';
+    window.location.href = 'https://github.com/login/oauth/authorize?client_id=Ov23linZL075zZj0rjHz&redirect_uri=https://scrtmission.netlify.app/&scope=read:user';
   }
 
   const DiscordAuth = async () => {
